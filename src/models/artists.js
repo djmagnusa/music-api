@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+//structure of document
 const artistSchema = new mongoose.Schema({
     artist: {
         type: String,
@@ -16,6 +17,7 @@ const artistSchema = new mongoose.Schema({
 
     genre: {
         type: String,
+        default: "rock",
         required: true,
         trim: true
     },
@@ -31,12 +33,9 @@ const artistSchema = new mongoose.Schema({
         required: true,
         trim: true 
     }
-
-
-
-
-
-
-
-
 })
+
+//creating collection
+const Artists = new mongoose.model("Artists", artistSchema)
+
+module.exports = Artists;
