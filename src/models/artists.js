@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 //structure of document
 const artistSchema = new mongoose.Schema({
-    artist: {
+    name: {
         type: String,
         required: true,
         unique: true,
