@@ -13,12 +13,30 @@ app.post("/artists", async(req, res) => {
         const addingArtists = new Artists(req.body)
         console.log(req.body)
         const insertArtists = await addingArtists.save();
-        res.send(insertArtists)
+        res.status(201).send(insertArtists)
     } catch(e) {
-        res.send(e);
+        res.status(400).send(e);
     }
 })
 
+app.get("/artists", async (req, res) => {
+    try{
+        const getArtists = await Artists.find({}).sort({"name": 1});
+        res.status(201).send(getArtists);
+    } catch(e) {
+        res.status(400).send(e);
+    }
+})
+
+app.get("/artists/:id", async (req, res) => {
+    try{
+        const _id = req.params.id;
+        const getArtist = await Artists.findById({_id:_id});
+        res.send(getArtist);
+    } catch(e) {
+        res.status(400).send(e);
+    }
+})
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
