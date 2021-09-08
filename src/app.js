@@ -51,6 +51,17 @@ app.patch("/artists/:id", async (req, res) => {
     }
 })
 
+app.delete("/artists/:id", async (req, res) => {
+    try{
+    
+        const getArtist = await Artists.findByIdAndDelete(req.params.id);
+        res.send(getArtist);
+    }
+    catch(e) {
+        res.status(500).send(e);
+    }
+})
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
