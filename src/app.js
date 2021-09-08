@@ -38,6 +38,19 @@ app.get("/artists/:id", async (req, res) => {
     }
 })
 
+app.patch("/artists/:id", async (req, res) => {
+    try{
+        const _id = req.params.id;
+        const getArtist = await Artists.findByIdAndUpdate({_id:_id}, req.body, {
+            new: true //to see the updated data
+        });
+        res.send(getArtist);
+
+    } catch(e) {
+        res.status(400).send(e);
+    }
+})
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
